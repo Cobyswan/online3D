@@ -104,7 +104,7 @@ app.get('/api/cone_presets/:user_id', controller.getConePresets)
 app.get('/api/preset_json/:preset_name', controller.getPresetJson)
 app.post('/api/preset', controller.createPreset)
 app.put('/api/preset/:preset_id', controller.updatePreset) //
-app.delete('/api/cube_preset/:id', controller.deleteCubePreset)
+app.delete('/api/cube_preset/:id/:user_id', controller.deleteCubePreset)
 app.delete('/api/sphere_preset/:id', controller.deleteSpherePreset)
 app.delete('/api/cone_preset/:id', controller.deleteConePreset)
 app.get('/api/user_data', aC.getUserData)

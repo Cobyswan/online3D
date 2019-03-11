@@ -52,23 +52,24 @@ module.exports = {
     },
     deleteCubePreset: (req, res) => {
         const db = req.app.get('db')
-        let {id} = req.params
-        db.delete_cube_preset([id]).then(presets => {
+        let {id, user_id} = req.params
+        db.delete_cube_preset([id, user_id]).then(presets => {
 
             res.status(200).json(presets)
         })
     },
     deleteSpherePreset: (req, res) => {
         const db = req.app.get('db')
-        let {id} = req.params
-        db.delete_sphere_preset([id]).then(presets => {
+        let {id, user_id} = req.params
+        db.delete_sphere_preset([id, user_id]).then(presets => {
             res.status(200).json(presets)
         })
     },
     deleteConePreset: (req, res) => {
         const db = req.app.get('db')
-        let {id} = req.params
-        db.delete_cone_preset([id]).then(presets => {
+        console.log(req.params)
+        let {id, user_id} = req.params
+        db.delete_cone_preset([id, user_id]).then(presets => {
             res.status(200).json(presets)
         })
     },
