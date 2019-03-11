@@ -99,8 +99,8 @@ app.post('/api/form', (req, res) => {
 })
 
 app.get('/api/cube_presets/:user_id', controller.getCubePresets)
-app.get('/api/sphere_presets', controller.getSpherePresets)
-app.get('/api/cone_presets', controller.getConePresets)
+app.get('/api/sphere_presets/:user_id', controller.getSpherePresets)
+app.get('/api/cone_presets/:user_id', controller.getConePresets)
 app.get('/api/preset_json/:preset_name', controller.getPresetJson)
 app.post('/api/preset', controller.createPreset)
 app.put('/api/preset/:preset_id', controller.updatePreset) //
