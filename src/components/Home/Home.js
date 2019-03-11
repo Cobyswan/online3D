@@ -18,36 +18,47 @@ class Home extends Component {
   }
    
   componentDidMount = () => {
-    this.getCubePresets();
-    this.getSpherePresets();
-    this.getConePresets();
+    // this.getCubePresets();
+    // this.getSpherePresets();
+    // this.getConePresets();
   }
 
   componentDidUpdate = (prevProps, prevState) => {
     if(prevProps.user !== this.props.user){
+      this.getCubePresets();
+      this.getSpherePresets();
+      this.getConePresets();
       this.setState({loggedIn: false})
     }
   }
  
   // FUNCTIONS TO GET PRESET DATA FROM DB
   getCubePresets = () => {
-    axios.get('/api/cube_presets').then(res => {
+    if(this.props.user){
+    axios.get(`/api/cube_presets/${this.props.user.user_id}`).then(res => {
       this.setState({cubePresets: res.data})
     })
   }
+  }
   getSpherePresets = () => {
-    axios.get('/api/sphere_presets').then(res => {
+    if(this.props.user){
+    axios.get(`/api/sphere_presets/${this.props.user.user_id}`).then(res => {
       this.setState({spherePresets: res.data})
     })
   }
+  }
   getConePresets = () => {
-    axios.get('/api/cone_presets').then(res => {
+    if(this.props.user){
+    axios.get(`/api/cone_presets/${this.props.user.user_id}`).then(res => {
       this.setState({conePresets: res.data})
     })
+  }
   }
 
 
   render() {
+    console.log(this.props)
+    console.log(this.props.user)
     let {user} = this.props
     let mappedCubePresets = this.state.cubePresets.map((preset, index) => {
       return (

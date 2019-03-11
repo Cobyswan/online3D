@@ -1,19 +1,22 @@
 module.exports = {
     getCubePresets: (req, res) => {
         const db = req.app.get('db')
-        db.get_cube_presets().then(presets => {
+        let {user_id} = req.params
+        db.get_cube_presets(user_id).then(presets => {
             res.status(200).json(presets)
         })
     },
     getSpherePresets: (req, res) => {
         const db = req.app.get('db')
-        db.get_sphere_presets().then(presets => {
+        let {user_id} = req.params
+        db.get_sphere_presets(user_id).then(presets => {
             res.status(200).json(presets)
         })
     },
     getConePresets: (req, res) => {
         const db = req.app.get('db')
-        db.get_cone_presets().then(presets => {
+        let {user_id} = req.params
+        db.get_cone_presets(user_id).then(presets => {
             res.status(200).json(presets)
         })
     },

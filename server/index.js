@@ -98,7 +98,7 @@ app.post('/api/form', (req, res) => {
     res.status(200).send('Confirmed')
 })
 
-app.get('/api/cube_presets', controller.getCubePresets)
+app.get('/api/cube_presets/:user_id', controller.getCubePresets)
 app.get('/api/sphere_presets', controller.getSpherePresets)
 app.get('/api/cone_presets', controller.getConePresets)
 app.get('/api/preset_json/:preset_name', controller.getPresetJson)
