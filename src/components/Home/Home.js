@@ -57,8 +57,6 @@ class Home extends Component {
 
 
   render() {
-    console.log(this.props)
-    console.log(this.props.user)
     let {user} = this.props
     let mappedCubePresets = this.state.cubePresets.map((preset, index) => {
       return (
