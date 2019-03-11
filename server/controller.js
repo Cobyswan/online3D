@@ -67,7 +67,6 @@ module.exports = {
     },
     deleteConePreset: (req, res) => {
         const db = req.app.get('db')
-        console.log(req.params)
         let {id, user_id} = req.params
         db.delete_cone_preset([id, user_id]).then(presets => {
             res.status(200).json(presets)

@@ -66,7 +66,7 @@ class Home extends Component {
             this.props.getPreset(preset.preset_json); this.props.getIsPreset(true); this.props.getPresetId(preset.preset_id);}}
             className='header' to={`/cube/${preset.preset_id}`}>{`${preset.preset_name}` || `Cube ${index}` }</Link>
           <button className='ui inverted red button' onClick={() => {
-            axios.delete(`/api/cube_preset/${preset.preset_id}/${this.props.user_id}`).then(res => {
+            axios.delete(`/api/cube_preset/${preset.preset_id}/${this.props.user.user_id}`).then(res => {
               this.setState({cubePresets: res.data})
             })
           }}>X</button>
@@ -82,7 +82,7 @@ class Home extends Component {
             this.props.getPreset(preset.preset_json); this.props.getIsPreset(true); this.props.getPresetId(preset.preset_id);}}
           className='header' to='/sphere'>{`${preset.preset_name}` || `Sphere ${index}` }</Link>
           <button className='ui inverted red button' onClick={() => {
-            axios.delete(`/api/sphere_preset/${preset.preset_id}/${this.props.user_id}`).then(res => {
+            axios.delete(`/api/sphere_preset/${preset.preset_id}/${this.props.user.user_id}`).then(res => {
               this.setState({spherePresets: res.data})
             })
           }}>X</button>
@@ -98,7 +98,7 @@ class Home extends Component {
             this.props.getPreset(preset.preset_json); this.props.getIsPreset(true); this.props.getPresetId(preset.preset_id);}}
           className='header' to='/cone'>{`${preset.preset_name}` || `Cone ${index}` }</Link>
           <button className='ui inverted red button' onClick={() => {
-            axios.delete(`/api/cone_preset/${preset.preset_id}/${this.props.user_id}`).then(res => {
+            axios.delete(`/api/cone_preset/${preset.preset_id}/${this.props.user.user_id}`).then(res => {
               this.setState({conePresets: res.data})
             })
           }}>X</button>
