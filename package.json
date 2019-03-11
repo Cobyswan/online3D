@@ -2,10 +2,31 @@
   "name": "personal-project-app",
   "version": "0.1.0",
   "private": true,
+  "main": "server/index.js",
   "dependencies": {
+    "axios": "^0.18.0",
+    "body-parser": "^1.18.3",
+    "dat.gui": "^0.7.5",
+    "dis-gui": "^2.1.0",
+    "dotenv": "^6.2.0",
+    "express": "^4.16.4",
+    "express-session": "^1.15.6",
+    "http-proxy-middleware": "^0.19.1",
+    "massive": "^5.7.5",
+    "nodemailer": "^5.1.1",
     "react": "^16.8.1",
+    "react-dat-gui": "^2.1.0",
     "react-dom": "^16.8.1",
-    "react-scripts": "2.1.5"
+    "react-redux": "^6.0.0",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "2.1.5",
+    "react-stripe-checkout": "^2.6.3",
+    "react-toastify": "^4.5.2",
+    "redux": "^4.0.1",
+    "semantic-ui": "^2.4.2",
+    "stripe": "^6.25.1",
+    "three": "^0.101.1",
+    "three-orbitcontrols": "^2.101.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -21,5 +42,6 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {}
 }

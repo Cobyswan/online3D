@@ -1,0 +1,17 @@
+.save-row{
+    display: none;
+}
+
+#gui {
+    position: static;
+    margin-top: 10px;
+    right: 0;
+}
+
+.main {
+    width: 100vw;
+    background: black;
+    color: white;
+}
+
+

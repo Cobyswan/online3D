@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css?family=Orbitron');
+
+body {
+    background: rgb(0, 0, 0);
+    height: 100%;
+    overflow: hidden;
+    color: white; 
+
+}
+
+main {
+    color: white;
+    height: 100vh;
+}
+
+.preset-section {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 50px;
+}
+
+.preset-section div {
+    padding: 10px 0px;
+}
+
+.preset-section h3 {
+    border-bottom: solid 2px rgb(36, 36, 36);
+    padding: 10px 50px;
+}
+
+.new-project-section {
+    border: solid 2px white;
+    margin: 20px;
+    padding: 20px;
+}
+
+.preset-box {
+    border: solid 2px white;
+}
+
+.starting-links-container {
+    display: flex;
+    justify-content: space-evenly
+}
+
+.starting-link, .preset-link {
+    text-decoration: none;
+    color: white;
+}
+
+.content {
+    display: flex;
+    justify-content: space-between
+}
+
+.ui.button {
+    font-size: xx-small;
+}
+
+.ui.secondary.inverted.menu {
+    display: flex;
+    justify-content: center;
+}
+
+.login-message {
+    margin-top: 100px;
+}

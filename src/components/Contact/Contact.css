@@ -1,0 +1,45 @@
+body {
+    color: white;
+}
+
+.main-contact {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+textarea {
+    width: 560px;
+    height: 175px;
+}
+
+.section-contact {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
+
+p {
+    width: 560px;
+}
+
+.ui.inverted.primary.button, .ui.inverted.primary.buttons .button {
+    margin-top: 10px;
+    width: 200px;
+}
+
+.confirmation-message {
+    margin-top: 10px;
+}
+
+
+
+
