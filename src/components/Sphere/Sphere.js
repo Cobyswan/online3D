@@ -11,7 +11,11 @@ import 'react-toastify/dist/ReactToastify.min.css'
 class Sphere extends Component {
 
   componentDidMount(){
-    axios.get(`/api/sphere_presets`).then(res => {
+    let url = `/api/sphere_presets/0`
+    if(this.props.user){
+      url = `/api/sphere_presets/${this.props.user.user_id}`
+    }
+    axios.get(url).then(res => {
       let spherePreset = res.data.filter(preset => {
         return preset.preset_id == this.props.match.params.preset_id
     })

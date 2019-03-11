@@ -11,7 +11,11 @@ import {getIsPreset, getPreset, getPresetId} from '../../ducks/reducer'
 class Cone extends Component {
 
   componentDidMount(){
-    axios.get(`/api/cone_presets`).then(res => {
+    let url = `/api/cone_presets/0`
+    if(this.props.user){
+      url = `/api/cone_presets/${this.props.user.user_id}`
+    }
+    axios.get(url).then(res => {
       let conePreset = res.data.filter(preset => {
         return preset.preset_id == this.props.match.params.preset_id
     })

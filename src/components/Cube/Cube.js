@@ -14,7 +14,11 @@ import { getPreset, getIsPreset, getPresetId } from '../../ducks/reducer'
 class Cube extends Component {
 
   componentDidMount(){
-        axios.get(`/api/cube_presets`).then(res => {
+    let url = `/api/cube_presets/0`
+      if(this.props.user){
+        url = `/api/cube_presets/${this.props.user.user_id}`
+      }
+        axios.get(url).then(res => {
           let cubePreset = res.data.filter(preset => {
              return preset.preset_id == this.props.match.params.preset_id
           })
@@ -257,15 +261,13 @@ class Cube extends Component {
 
     
     render(){
-      console.log(this.props.presetId)
         return(
           <div className='main'>
-
           <div id='Canvas'
             style={{ width: '100vw', height: '100vh' }}
             ref={(canvas) => { this.canvas = canvas }}
             ><ToastContainer/></div>
-            </div>
+          </div>
         )
       }
     }

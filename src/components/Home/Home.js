@@ -18,9 +18,9 @@ class Home extends Component {
   }
    
   componentDidMount = () => {
-    // this.getCubePresets();
-    // this.getSpherePresets();
-    // this.getConePresets();
+    this.getCubePresets();
+    this.getSpherePresets();
+    this.getConePresets();
   }
 
   componentDidUpdate = (prevProps, prevState) => {
