@@ -67,16 +67,33 @@ main {
 }
 
 @media only screen 
-and (min-device-width : 375px) 
-and (max-device-width : 812px)
+and (min-device-width : 360px) 
 and (-webkit-device-pixel-ratio : 3) { 
     .preset-section div {
         width: 100px;
         padding: 10px 0px;
         font-size: x-small
     }
-    .ui.button {
-        font-size: 0.25em;
+    .inverted > .content > .button {
+       font-size: 1vw;
+    }
+    .preset-section h3 {
+        border-bottom: solid 2px rgb(36, 36, 36);
+        padding: 10px 20px;
+
+    }
+
+}
+@media only screen 
+and (min-device-width : 375px) 
+and (-webkit-device-pixel-ratio : 3) { 
+    .preset-section div {
+        width: 100px;
+        padding: 10px 0px;
+        font-size: x-small
+    }
+    .inverted > .content > .button {
+       font-size: 1vw;
     }
     .preset-section h3 {
         border-bottom: solid 2px rgb(36, 36, 36);
