@@ -78,7 +78,7 @@ app.post('/api/form', (req, res) => {
 
         let mailOptions = {
             from: req.body.email,
-            to: 'cobyashi21@gmail.com',
+            to: process.env.NODEMAILER_EMAIL,
             replyTo: req.body.email,
             subject: 'New Message',
             text: req.body.message,

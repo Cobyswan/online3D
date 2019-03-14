@@ -42,7 +42,7 @@ class Sphere extends Component {
         //ADD CAMERA
         this.camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000)
         this.controls = new OrbitControls( this.camera, this.renderer.domElement );
-        this.camera.position.z = 20  
+        this.camera.position.z = 6  
         
         //ADD LIGHTS
         this.spotLight = new THREE.SpotLight(0xffffff, 0.1, 50, 0.5, 0.5);
@@ -50,26 +50,33 @@ class Sphere extends Component {
         this.spotLight.castShadow = true
         this.spotLight.shadow.mapSize.width = 2000;
         this.spotLight.shadow.mapSize.height = 2000;
-        this.spotLight.shadow.camera.near = 0.5;
-        this.spotLight.shadow.camera.far = 21000;
+        this.spotLight.shadow.camera.near = 0.1;
+        this.spotLight.shadow.camera.far = 50000;
         this.scene.add(this.spotLight)
 
         //ADD PLANE/FLOOR
         const floorGeometry = new THREE.BoxGeometry(2000,1, 2000)
-        const floorMaterial = new THREE.MeshStandardMaterial({color: 0x808080, emissive: 0x808080 })
+        const floorMaterial = new THREE.MeshStandardMaterial({
+          color: 0xffffff,
+          roughness: 0.5,
+          metalness: 0.5,
+          emissive: 0x808080,
+          emissiveIntensity: .8,
+          metalness: 0,
+        })
         this.floor = new THREE.Mesh(floorGeometry, floorMaterial)
-        this.floor.position.set(0, - 20, 0)
+        this.floor.position.set(0, - 5, 0)
         this.floor.receiveShadow = true
         this.scene.add(this.floor);
 
         
         //ADD sphere
-        const geometry = new THREE.SphereGeometry(3, 36, 36)
+        const geometry = new THREE.SphereGeometry(1, 36, 36)
         const material = new THREE.MeshStandardMaterial({ 
           color: 0xffffff,
             roughness: 0.5,
             metalness: 0.5,
-            emissive: 0x000000,
+            emissive: 0x999999,
             emissiveIntensity: .5,
             metalness: 0,
         })
@@ -88,7 +95,7 @@ class Sphere extends Component {
           scaleY: 1,
           scaleZ: 1,
           wireframe: false,
-          emissiveColor: 0x000000,
+          emissiveColor: 0x999999,
           spotLightIntensity: 0.1,
           lightPositionX: 0,
           lightPositionY: 9,
@@ -191,15 +198,15 @@ class Sphere extends Component {
         this.gui.remember(this.controller)
         this.gui.add(this.controller, 'preset').name('Preset Name')
         let folder1 = this.gui.addFolder('Sphere')
-        folder1.add(this.controller, 'scaleX', 1, 5, .5).onChange(() => {this.sphere.scale.x = this.controller.scaleX}).name('Sphere Scale X').listen()
-        folder1.add(this.controller, 'scaleY', 1, 5, .5).onChange(() => {this.sphere.scale.y = this.controller.scaleY}).name('Sphere Scale Y').listen()
-        folder1.add(this.controller, 'scaleZ', 1, 5, .5).onChange(() => {this.sphere.scale.z = this.controller.scaleZ}).name('Sphere Scale Z').listen()
+        folder1.add(this.controller, 'scaleX', 1, 3, .25).onChange(() => {this.sphere.scale.x = this.controller.scaleX}).name('Sphere Scale X').listen()
+        folder1.add(this.controller, 'scaleY', 1, 3, .25).onChange(() => {this.sphere.scale.y = this.controller.scaleY}).name('Sphere Scale Y').listen()
+        folder1.add(this.controller, 'scaleZ', 1, 3, .25).onChange(() => {this.sphere.scale.z = this.controller.scaleZ}).name('Sphere Scale Z').listen()
         folder1.addColor(this.controller, 'emissiveColor').onChange(() => {this.sphere.material.emissive.set(this.controller.emissiveColor)}).name('Color')
         folder1.add(this.controller, 'wireframe').onChange(() => {material.wireframe = this.controller.wireframe}).name('Wireframe').listen();
         let folder2 = this.gui.addFolder('Lighting')
-        folder2.add(this.controller, 'spotLightIntensity', 0, 1, 0.1).onChange(() => {this.spotLight.intensity = this.controller.spotLightIntensity}).name('Light Intensity')
+        folder2.add(this.controller, 'spotLightIntensity', 0, 2, 0.1).onChange(() => {this.spotLight.intensity = this.controller.spotLightIntensity}).name('Light Intensity')
         folder2.add(this.controller, 'lightPositionX', -25, 25, 1).onChange(() => {this.spotLight.position.x = this.controller.lightPositionX}).name('X Position')
-        folder2.add(this.controller, 'lightPositionY', 9, 50, 1).onChange(() => {this.spotLight.position.y = this.controller.lightPositionY}).name('Y Position')
+        folder2.add(this.controller, 'lightPositionY', 9, 29, 1).onChange(() => {this.spotLight.position.y = this.controller.lightPositionY}).name('Y Position')
         folder2.add(this.controller, 'lightPositionZ', -25, 25, 1).onChange(() => {this.spotLight.position.z = this.controller.lightPositionZ}).name('Z Position')
         let folder3 = this.gui.addFolder('Animation')
         folder3.add(this.controller, 'xRotation', 0, 0.1, 0.01).onChange(() => {this.sphere.rotation.x = this.controller.xRotation}).name('X Rotation')
@@ -234,7 +241,7 @@ class Sphere extends Component {
     animate = () => {
       let time = Date.now() * 0.00025;
       if(this.controller.animate === true){
-        this.spotLight.position.x = Math.sin( time * 0.9 ) * 10;
+        this.spotLight.position.x = Math.sin( time * 1.2 ) * 10;
       }
       this.sphere.rotation.x += this.controller.xRotation
       this.sphere.rotation.y += this.controller.yRotation 

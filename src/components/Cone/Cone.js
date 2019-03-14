@@ -42,7 +42,7 @@ class Cone extends Component {
         //ADD CAMERA
         this.camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000)
         this.controls = new OrbitControls( this.camera, this.renderer.domElement );
-        this.camera.position.z = 20
+        this.camera.position.z = 6
         
         
         
@@ -53,8 +53,8 @@ class Cone extends Component {
         this.spotLight.castShadow = true
         this.spotLight.shadow.mapSize.width = 1000;
         this.spotLight.shadow.mapSize.height = 1000;
-        this.spotLight.shadow.camera.near = 1;
-        this.spotLight.shadow.camera.far = 200;
+        this.spotLight.shadow.camera.near = 0.1;
+        this.spotLight.shadow.camera.far = 2000;
 
 
 
@@ -66,20 +66,20 @@ class Cone extends Component {
           metalness: 0.5,
           emissive: 0x808080,
           emissiveIntensity: .8,
-          metalness: 1,
+          metalness: 0,
          })
         this.floor = new THREE.Mesh(floorGeometry, floorMaterial)
-        this.floor.position.set(0, - 20, 0)
+        this.floor.position.set(0, - 5, 0)
         this.floor.receiveShadow = true
         this.scene.add(this.floor);
         
         //ADD CONE
-        const geometry = new THREE.ConeGeometry(5, 10, 32)
+        const geometry = new THREE.ConeGeometry(1, 3, 32)
         const material = new THREE.MeshStandardMaterial({ 
-          color: 0x808080,
+          color: 0x999999,
             roughness: 0.5,
             metalness: 0.5,
-            emissive: 0x000000,
+            emissive: 0x999999,
             emissiveIntensity: .5,
             metalness: 0
         })
@@ -95,7 +95,7 @@ class Cone extends Component {
           scaleY: 1,
           scaleZ: 1,
           wireframe: false,
-          emissiveColor: 0x000000,
+          emissiveColor: 0x999999,
           spotLightIntensity: 0.1,
           lightPositionX: 0,
           lightPositionY: 9,
@@ -103,6 +103,7 @@ class Cone extends Component {
           xRotation: 0,
           yRotation: 0,
           zRotation: 0,
+          animateLight: false,
           save: () => {
             if(this.props.user)
             {
@@ -125,7 +126,8 @@ class Cone extends Component {
                       lightPositionZ: this.controller.lightPositionZ,
                       xRotation: this.controller.xRotation,
                       yRotation: this.controller.yRotation,
-                      zRotation: this.controller.yRotation
+                      zRotation: this.controller.yRotation,
+                      animateLight: this.controller.animateLight
                     }
                   }
                 },
@@ -172,7 +174,8 @@ class Cone extends Component {
                       lightPositionZ: this.controller.lightPositionZ,
                       xRotation: this.controller.xRotation,
                       yRotation: this.controller.yRotation,
-                      zRotation: this.controller.yRotation
+                      zRotation: this.controller.yRotation,
+                      animateLight: this.controller.animateLight
                     }
                   }
                 },
@@ -197,9 +200,9 @@ class Cone extends Component {
         this.gui.remember(this.controller)
         this.gui.add(this.controller, 'preset').name('Preset Name')
         let folder1 = this.gui.addFolder('Cone')
-        folder1.add(this.controller, 'scaleX', 1, 5, .5).onChange(() => {this.cone.scale.x = this.controller.scaleX}).name('Cone Scale X').listen()
-        folder1.add(this.controller, 'scaleY', 1, 5, .5).onChange(() => {this.cone.scale.y = this.controller.scaleY}).name('Cone Scale Y').listen()
-        folder1.add(this.controller, 'scaleZ', 1, 5, .5).onChange(() => {this.cone.scale.z = this.controller.scaleZ}).name('Cone Scale Z').listen()
+        folder1.add(this.controller, 'scaleX', 1, 2, .10).onChange(() => {this.cone.scale.x = this.controller.scaleX}).name('Cone Scale X').listen()
+        folder1.add(this.controller, 'scaleY', 1, 2, .10).onChange(() => {this.cone.scale.y = this.controller.scaleY}).name('Cone Scale Y').listen()
+        folder1.add(this.controller, 'scaleZ', 1, 2, .10).onChange(() => {this.cone.scale.z = this.controller.scaleZ}).name('Cone Scale Z').listen()
         folder1.addColor(this.controller, 'emissiveColor').onChange(() => {this.cone.material.emissive.set(this.controller.emissiveColor)}).name('Color')
         folder1.add(this.controller, 'wireframe').onChange(() => {material.wireframe = this.controller.wireframe}).name('Wireframe').listen();
         let folder2 = this.gui.addFolder('Lighting')
@@ -211,6 +214,7 @@ class Cone extends Component {
         folder3.add(this.controller, 'xRotation', 0, 0.1, 0.01).onChange(() => {this.cone.rotation.x = this.controller.xRotation}).name('X Rotation')
         folder3.add(this.controller, 'yRotation', 0, 0.1, 0.01).onChange(() => {this.cone.rotation.y = this.controller.yRotation}).name('Y Rotation')
         folder3.add(this.controller, 'zRotation', 0, 0.1, 0.01).onChange(() => {this.cone.rotation.z = this.controller.zRotation}).name('Z Rotation')
+        folder3.add(this.controller, 'animateLight').onChange(this.controller.animateLight != this.controller.animateLight).name('Animate Light')
         if(this.props.isPreset === false)
         {
           this.gui.add(this.controller, 'save').name('Save Preset')
@@ -238,6 +242,10 @@ class Cone extends Component {
         cancelAnimationFrame(this.frameId)
       }
     animate = () => {
+      let time = Date.now() * 0.00025;
+      if(this.controller.animateLight === true){
+        this.spotLight.position.x = Math.sin( time * 1.2 ) * 10;
+      }
       this.cone.rotation.x += this.controller.xRotation
       this.cone.rotation.y += this.controller.yRotation 
       this.cone.rotation.z += this.controller.zRotation

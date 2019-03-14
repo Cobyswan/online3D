@@ -51,7 +51,6 @@ export default class Contact extends Component {
       <main className='main-contact'>
         <section className='section-contact'>
           <h1>Contact</h1>
-          <p>If you find any bugs with the site or just want to say hi, Let me know below and I'll get back to you ASAP.</p>
         </section>
       <div className='ui equal width form'>
         <div className='fields'>

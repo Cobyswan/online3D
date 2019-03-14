@@ -82,7 +82,7 @@ class Cube extends Component {
             color: 0xffffff,
             roughness: 0.5,
             metalness: 0.5,
-            emissive: 0x000000,
+            emissive: 0x999999,
             emissiveIntensity: .8,
             metalness: 1,
           })
@@ -99,7 +99,7 @@ class Cube extends Component {
             cubeHeight: 1,
             cubeDepth: 1,
             wireframe: false,
-            emissiveColor: 0x000000,
+            emissiveColor: 0x999999,
             spotLightIntensity: 0.1,
             lightPositionX: 0,
             lightPositionY: 2,
@@ -107,7 +107,8 @@ class Cube extends Component {
             xRotation: 0,
             yRotation: 0,
             zRotation: 0,
-            animate: false,
+            animateWidth: false,
+            animateLight: false,
             save: () => {
               if(this.props.user)
               {
@@ -130,7 +131,8 @@ class Cube extends Component {
                         xRotation: this.controller.xRotation,
                         yRotation: this.controller.yRotation,
                         zRotation: this.controller.yRotation,
-                        animate: this.controller.animate
+                        animateWidth: this.controller.animateWidth,
+                        animateLight: this.controller.animateLight
                       }
                     }
                   },
@@ -178,7 +180,8 @@ class Cube extends Component {
                         xRotation: this.controller.xRotation,
                         yRotation: this.controller.yRotation,
                         zRotation: this.controller.zRotation,
-                        animate: this.controller.animate
+                        animateWidth: this.controller.animateWidth,
+                        animateLight: this.controller.animateLight
                       }
                     }
                   },
@@ -216,7 +219,8 @@ class Cube extends Component {
           folder3.add(this.controller, 'xRotation', 0, 0.1, 0.01).onChange(() => {this.cube.rotation.x = this.controller.xRotation}).name('X Rotation')
           folder3.add(this.controller, 'yRotation', 0, 0.1, 0.01).onChange(() => {this.cube.rotation.y = this.controller.yRotation}).name('Y Rotation')
           folder3.add(this.controller, 'zRotation', 0, 0.1, 0.01).onChange(() => {this.cube.rotation.z = this.controller.zRotation}).name('Z Rotation')
-          folder3.add(this.controller, 'animate').onChange(this.controller.animate != this.controller.animate).name('Animate Width')
+          folder3.add(this.controller, 'animateWidth').onChange(this.controller.animate != this.controller.animate).name('Animate Width')
+          folder3.add(this.controller, 'animateLight').onChange(this.controller.animate != this.controller.animate).name('Animate Light')
           if(this.props.isPreset === false)
           {
             this.gui.add(this.controller, 'save').name('Save Preset')
@@ -245,9 +249,12 @@ class Cube extends Component {
       }
     animate = () => {
        let time = Date.now() * 0.00025;
-       if(this.controller.animate === true){      
+       if(this.controller.animateWidth === true){      
         this.cube.scale.x = Math.sin( time ) * 10;
        }
+       if(this.controller.animateLight === true){
+        this.spotLight.position.x = Math.sin( time * 1.2 ) * 10;
+      }
        this.cube.rotation.x += this.controller.xRotation
        this.cube.rotation.y += this.controller.yRotation 
        this.cube.rotation.z += this.controller.zRotation

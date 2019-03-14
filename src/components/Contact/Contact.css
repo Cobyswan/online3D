@@ -16,8 +16,9 @@ body {
 }
 
 textarea {
-    width: 560px;
-    height: 175px;
+    width: 88vh;
+    height: 25vh;
+    border-radius: 5px;
 }
 
 .section-contact {
@@ -42,4 +43,14 @@ p {
 
 
 
-
+@media only screen 
+and (min-device-width : 375px) 
+and (max-device-width : 812px)
+and (-webkit-device-pixel-ratio : 3){
+    textarea {
+        width: 360px;
+    }
+    .fields {
+        width: 375px;
+    }
+}
